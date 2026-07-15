@@ -1,0 +1,15 @@
+node_modules
+.env
+.DS_Store
+.git
+.gitignore
+.next
+*.log
+
+Dockerfile*
+
+.DS_Store
+*.pem
+*.tsbuildinfo
+README.md
+README.md
