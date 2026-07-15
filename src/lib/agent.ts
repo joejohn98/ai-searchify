@@ -1,13 +1,9 @@
 import { ToolLoopAgent, tool, isStepCount } from "ai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { config } from "dotenv";
-config({ path: ".env" });
 import { tavily } from "@tavily/core";
 import { z } from "zod";
 
-const google = createGoogleGenerativeAI({
-  apiKey: process.env.GOOGLEGENERATIVEAIAPIKEY,
-});
+const google = createGoogleGenerativeAI();
 
 const client = tavily({ apiKey: process.env.TAVILY_API_KEY });
 

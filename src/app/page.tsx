@@ -23,7 +23,9 @@ const EXAMPLE_PROMPTS = [
 ];
 
 function BrandMark({ className = "h-5 w-5" }: { className?: string }) {
-  return <Sparkles aria-hidden="true" className={className} strokeWidth={2.25} />;
+  return (
+    <Sparkles aria-hidden="true" className={className} strokeWidth={2.25} />
+  );
 }
 
 function AssistantAvatar({ small = false }: { small?: boolean }) {
@@ -33,7 +35,11 @@ function AssistantAvatar({ small = false }: { small?: boolean }) {
         small ? "h-8 w-8" : "h-10 w-10"
       }`}
     >
-      <Search aria-hidden="true" className={small ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2.25} />
+      <Search
+        aria-hidden="true"
+        className={small ? "h-4 w-4" : "h-5 w-5"}
+        strokeWidth={2.25}
+      />
     </div>
   );
 }
@@ -46,24 +52,30 @@ function Sidebar({ onNewChat }: { onNewChat: () => void }) {
           <BrandMark />
         </div>
         <div>
-          <p className="text-[15px] font-semibold tracking-tight text-white">Research Agent</p>
-          <p className="mt-0.5 text-xs text-slate-400">Search with confidence</p>
+          <p className="text-[15px] font-semibold tracking-tight text-white">
+            Research Agent
+          </p>
+          <p className="mt-0.5 text-xs text-slate-400">
+            Search with confidence
+          </p>
         </div>
       </div>
 
       <button
         type="button"
         onClick={onNewChat}
-        className="mt-9 flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.07] px-4 text-sm font-medium text-slate-100 transition-colors hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111827]"
+        className="mt-9 flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.07] px-4 text-sm font-medium text-slate-100 transition-colors hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111827]"
       >
         <Plus aria-hidden="true" className="h-4 w-4" strokeWidth={2.25} />
         New chat
       </button>
 
-      <div className="mt-auto rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+      <div className="mt-auto rounded-2xl border border-white/10 bg-white/4 p-4">
         <div className="mb-3 flex items-center gap-2 text-indigo-300">
           <Globe2 aria-hidden="true" className="h-4 w-4" />
-          <span className="text-xs font-semibold uppercase tracking-[0.14em]">Web research</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.14em]">
+            Web research
+          </span>
         </div>
         <p className="text-sm leading-6 text-slate-400">
           Get current answers grounded in information from across the web.
@@ -73,7 +85,11 @@ function Sidebar({ onNewChat }: { onNewChat: () => void }) {
   );
 }
 
-function EmptyState({ onPromptClick }: { onPromptClick: (prompt: string) => void }) {
+function EmptyState({
+  onPromptClick,
+}: {
+  onPromptClick: (prompt: string) => void;
+}) {
   return (
     <div className="flex flex-1 items-center justify-center overflow-y-auto px-4 py-12 sm:px-6">
       <div className="w-full max-w-3xl text-center">
@@ -88,7 +104,8 @@ function EmptyState({ onPromptClick }: { onPromptClick: (prompt: string) => void
           What would you like to explore?
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
-          Ask a question and I&apos;ll search the web to find a clear, current answer.
+          Ask a question and I&apos;ll search the web to find a clear, current
+          answer.
         </p>
 
         <div className="mt-10 grid gap-3 text-left sm:grid-cols-3">
@@ -124,9 +141,13 @@ function ThinkingIndicator() {
   );
 }
 
-function getTextFromParts(parts: Array<{ type: string; text?: string }>): string {
+function getTextFromParts(
+  parts: Array<{ type: string; text?: string }>,
+): string {
   return parts
-    .filter((part): part is { type: "text"; text: string } => part.type === "text")
+    .filter(
+      (part): part is { type: "text"; text: string } => part.type === "text",
+    )
     .map((part) => part.text)
     .join("");
 }
@@ -187,7 +208,9 @@ export default function Home() {
             <BrandMark className="h-4 w-4" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-900">Research Agent</p>
+            <p className="text-sm font-semibold text-slate-900">
+              Research Agent
+            </p>
             <p className="text-xs text-slate-500">Web-powered answers</p>
           </div>
         </header>
@@ -195,7 +218,11 @@ export default function Home() {
         {messages.length === 0 ? (
           <EmptyState onPromptClick={handlePromptClick} />
         ) : (
-          <div className="flex-1 overflow-y-auto" aria-live="polite" aria-busy={isLoading}>
+          <div
+            className="flex-1 overflow-y-auto"
+            aria-live="polite"
+            aria-busy={isLoading}
+          >
             <div className="mx-auto max-w-3xl space-y-2 py-6 sm:py-8">
               {messages.map((message) => {
                 const text = getTextFromParts(message.parts);
@@ -216,13 +243,19 @@ export default function Home() {
                       }`}
                     >
                       {isUser ? (
-                        <p className="whitespace-pre-wrap text-sm leading-6">{text}</p>
+                        <p className="whitespace-pre-wrap text-sm leading-6">
+                          {text}
+                        </p>
                       ) : (
                         <div className="text-sm leading-6 [&_a]:font-medium [&_a]:text-indigo-600 [&_a]:underline-offset-2 hover:[&_a]:underline [&_h1]:mb-3 [&_h1]:text-lg [&_h1]:font-semibold [&_h2]:mb-2 [&_h2]:mt-4 [&_h2]:text-base [&_h2]:font-semibold [&_h3]:mb-2 [&_h3]:mt-3 [&_h3]:font-semibold [&_li]:my-1 [&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-3 [&_p:last-child]:mb-0 [&_strong]:font-semibold [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5">
                           <ReactMarkdown
                             components={{
                               a: ({ href, children }) => (
-                                <a href={href} target="_blank" rel="noopener noreferrer">
+                                <a
+                                  href={href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
                                   {children}
                                 </a>
                               ),
@@ -278,7 +311,8 @@ export default function Home() {
             </button>
           </form>
           <p className="mx-auto mt-2 max-w-3xl text-center text-[11px] text-slate-400">
-            Enter to send · Shift + Enter for a new line · Verify important information.
+            Enter to send · Shift + Enter for a new line · Verify important
+            information.
           </p>
         </div>
       </main>
